@@ -84,3 +84,16 @@ print("\nSaved to big_flight_operations_clean.csv")
 # for col in df.columns:
 #     print(f"\n-- {col} --")
 #     print(df[col].unique()[:10])
+
+
+print(df.isnull().sum())
+print("\n-- flight_type unique --")
+print(df['flight_type'].unique())
+print("\n-- airline unique --")
+print(df['airline'].unique())
+print("\n-- passengers sample --")
+print(df['passengers'].head(10))
+print("\n-- cargo_kg sample --")
+print(df['cargo_kg'].head(10))
+print("\n-- flight_date sample --")
+print(df['flight_date'].head(10))
