@@ -45,7 +45,7 @@ df['flight_date'] = pd.to_datetime(df['flight_date'], dayfirst=False, errors='co
 df = df.drop_duplicates()
 
 # CHECKING THE CLEANED DATASET
-print("=== CLEANED DATA ===")
+print("THIS IS CLEAN")
 print(df.shape)
 print(df.dtypes)
 print(df.isnull().sum())
