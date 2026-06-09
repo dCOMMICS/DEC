@@ -17,6 +17,44 @@ df['flight_type'] = df['flight_type'].replace({
     'dom': 'domestic'
 })
 
+# PASSENGERS COLUMN
+
+def clean_numeric(val):
+    if pd.isna(val):
+        return np.nan
+    val = str(val).lower().strip()
+    # Remove 'kg' or other units
+    val = re.sub(r'[a-zA-Z]', '', val).strip()
+    # Convert text numbers
+    text_map = {'one hundred': '100', 'two hundred': '200'}
+    for k, v in text_map.items():
+        val = val.replace(k, v)
+    try:
+        return float(val)
+    except:
+        return np.nan
+
+df['passengers'] = df['passengers'].apply(clean_numeric)
+df['cargo_kg'] = df['cargo_kg'].apply(clean_numeric)
+
+# CONVERTING FLIGHT DATE TO DATETIME
+
+df['flight_date'] = pd.to_datetime(df['flight_date'], dayfirst=False, errors='coerce')
+
+# DROPPING DUPLICATES
+df = df.drop_duplicates()
+
+# CHECKING THE CLEANED DATASET
+print("=== CLEANED DATA ===")
+print(df.shape)
+print(df.dtypes)
+print(df.isnull().sum())
+print(df.head(10))
+
+# LAST PART 
+df.to_csv('big_flight_operations_clean.csv', index=False)
+print("\nSaved to big_flight_operations_clean.csv")
+
 #  SOMETHINGS TO BE DELETED BELOW THIS AND OTHERS ARE FOR TESTING PURPOSES ONLY AND LEFT.
 # print(df.head(200))
 
